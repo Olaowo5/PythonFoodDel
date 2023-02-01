@@ -114,22 +114,25 @@ model.add(Dense(1))
 model.summary()
 
 
-import pickle as rick
-import os.path as pth
+import pickle as rick #for saving
+import os.path as pth #for path directory
 
 #check if model is saved
 olamodel = model
 file_path = r'ricky.pkl'
 flag = pth.exists(file_path)
-# training the model
+
 if flag:  
+    #if the model exists no need to retrain it cause
+    # cause it takes too long
     olamodel = rick.load(open('ricky.pkl','rb'))  
     print("we got model")
 else:
     print("No Model")
+    # training the model
     model.compile(optimizer='adam', loss='mean_squared_error')
     model.fit(xtrain, ytrain, batch_size=1, epochs=9)
-    #saving model if doesnt exist else open
+    #saving the model 
     rick.dump(model,open('ricky.pkl','wb'))
     olamodel = model
 
